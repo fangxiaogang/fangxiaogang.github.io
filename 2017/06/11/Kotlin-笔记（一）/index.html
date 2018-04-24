@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <title>Kotlin 笔记（一） - fangxiaogang</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/images/scribble.png' alt='Home' width='53' height='59'></a>
+  <p>fangxiaogang</p>
+  <p>我可以！</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://fangxiaogang.github.io/About/index.html'>About</a>
+  
+    <a class='main' href='https://github.com/fangxiaogang'>Github</a>
+  
+    <a class='main' href='mailto:1005275062@qq.com'>Email</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/06/13/真正完美的单例是什么样的/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/05/19/Android-开机自启动-App/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-06-11</div>
+            Kotlin 笔记（一）
+          </h1>
+          <p>在今年的 IO 大会上，Kotlin 成为了 Android 的官方开发语言，作为一个 Android 开发者是必须要学习并掌握的，由于刚确立为官方语言，完全的 Kotlin 是不会那么快的，就像苹果的 Swift 一样。虽然不是刻不容缓，但是学习 Kotlin 的语法和用法还是要提上日程，这篇为学习 Kotlin 的第一篇学习笔记，也提醒自己在工作之余好好学习 Kotlin。</p>
+<h3 id="什么是-Kotlin"><a href="#什么是-Kotlin" class="headerlink" title="什么是 Kotlin"></a>什么是 Kotlin</h3><p>Kotlin 是一种基于 JVM 的编程语言，由 JetBrains 开发，完全兼容 Java，更安全、更简洁。更简洁、更安全、兼容性更好、各种 IDE 或命令行工具都适用。</p>
+<h4 id="Kotlin-的特性"><a href="#Kotlin-的特性" class="headerlink" title="Kotlin 的特性"></a>Kotlin 的特性</h4><p> <strong>1 、简洁</strong></p>
+<p> 使用 Kotlin 在很多地方可以少用很多的模板代码，因为在大部分典型的情况下都在语言中默认实现了。</p>
+<p>   这是典型的 Java 代码</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">   </div><div class="line">   public class User &#123;</div><div class="line">    private long id;</div><div class="line">    private String name;</div><div class="line">    private String addr;</div><div class="line"></div><div class="line">    public long getId() &#123;</div><div class="line">        return id;</div><div class="line">    &#125;</div><div class="line">    public void setId(long id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line">    public String getName() &#123;</div><div class="line">        return name;</div><div class="line">    &#125;</div><div class="line">    public void setName(String name) &#123;</div><div class="line">        this.name = name;</div><div class="line">    &#125;</div><div class="line">    public String getAddr() &#123;</div><div class="line">        return addr;</div><div class="line">    &#125;</div><div class="line">    public void setAddr(String addr) &#123;</div><div class="line">        this.addr = addr;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    @Override public String toString() &#123;</div><div class="line">        return &quot;User&#123;&quot; +</div><div class="line">          &quot;id=&quot; + id +</div><div class="line">          &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +</div><div class="line">          &quot;, addr=&apos;&quot; + addr + &apos;\&apos;&apos; +</div><div class="line">          &apos;&#125;&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>   Kotlin就会简洁很多，所有的属性和访问器都会自动生成，以及 toString(); </p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">data class User(</div><div class="line"> var id: Long,</div><div class="line"> var name: String,</div><div class="line"> var addr: String)</div></pre></td></tr></table></figure>
+<p>   哇，这是如此简洁，没有程序员会拒绝这样的代码，毕竟我们都是偷懒的。</p>
+<p>   <strong>2、空安全</strong></p>
+<p>   NullPointerException 是每个 Java 开发者都会遇到的 Bug，怎么修改，加个空判断咯。但是这样的判断加多了其实也烦，代码也不够美观。Kotlin 跟其他现代语言一样，是空安全的，通过一个安全调用操作符（?）来明确地指定一个对象是否能为空。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var str: String = null;  //✘ 直接报错，无法编译通过</div><div class="line">var str: String ?= null; //✔ 添加安全调用操作符，明确指定 str 可以为空</div></pre></td></tr></table></figure>
+
+          <br>
+<p>fangxiaogang</p>
+<p><img src='/images/scribble3.png' alt='scribble'></p>
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://fangxiaogang.github.io/About/index.html'>About</a>
+  
+    <a class='main' href='https://github.com/fangxiaogang'>Github</a>
+  
+    <a class='main' href='mailto:1005275062@qq.com'>Email</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; John Doe. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+  <img src='/images/scribble2.png' alt='scribble' />
+</footer>
+
+  </body>
+</html>
