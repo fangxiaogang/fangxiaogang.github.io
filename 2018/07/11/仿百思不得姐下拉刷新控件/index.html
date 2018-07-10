@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>仿百思不得姐下拉刷新控件 - fangxiaogang</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/images/scribble.png' alt='Home' width='53' height='59'></a>
+  <p>fangxiaogang</p>
+  <p>我可以！</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://fangxiaogang.github.io/About/index.html'>About</a>
+  
+    <a class='main' href='https://github.com/fangxiaogang'>Github</a>
+  
+    <a class='main' href='mailto:1005275062@qq.com'>Email</a>
+  
+</div>
+
+      <section class='paging'>
+  
+  
+    <div class='right'>
+      <a href='/2018/04/27/Hexo-博客部署失败-could-not-read-Username/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-07-11</div>
+            仿百思不得姐下拉刷新控件
+          </h1>
+          <h3 id="仿百思不得姐下拉刷新控件-RefreshLayout"><a href="#仿百思不得姐下拉刷新控件-RefreshLayout" class="headerlink" title="仿百思不得姐下拉刷新控件 RefreshLayout"></a>仿百思不得姐下拉刷新控件 RefreshLayout</h3><p>仿百思不得姐 可做任何控件的下拉刷新，倾入性低</p>
+<p>项目地址：<a href="https://github.com/fangxiaogang/RefreshLayout" target="_blank" rel="external">https://github.com/fangxiaogang/RefreshLayout</a></p>
+<p>在 <a href="https://github.com/scwang90/SmartRefreshLayout" target="_blank" rel="external"><strong>SmartRefreshLayout</strong></a> 的基础上做的二次修改，这是一个非常好的下拉刷新、上拉加载框架，在 github 上的star 数超过13k，代码质量不必多疑。</p>
+<p><em>少废话，先看东西</em></p>
+<p><img src="http://onfkdy4l9.bkt.clouddn.com/333.gif" alt=""></p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>看着复杂，其实就是多张图片的播放，最简单的帧动画而已。把仿百思不得姐反编译或者解压，就可以发现在 drawable 文件夹中存在多张熟悉的小图片。轻松得到源文件。</p>
+<p>逐一分析后，总的过程分为三部分：</p>
+<ul>
+<li>下拉过程中，显示一张图片及文字</li>
+<li>刷新过程，显示帧动画的动态效果，切换文字</li>
+<li>松开刷新完成后回弹</li>
+</ul>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class CustomRefreshHeader extends LinearLayout implements RefreshHeader &#123;</div><div class="line"></div><div class="line">    private ImageView mImage;</div><div class="line">    private AnimationDrawable pullDownAnim;</div><div class="line">    private AnimationDrawable refreshingAnim;</div><div class="line">    private TextView tv_refresh_header;</div><div class="line">    private boolean hasSetPullDownAnim = false;</div><div class="line"></div><div class="line">    public CustomRefreshHeader(Context context) &#123;</div><div class="line">        this(context, null, 0);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public CustomRefreshHeader(Context context, @Nullable AttributeSet attrs) &#123;</div><div class="line">        this(context, attrs, 0);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public CustomRefreshHeader(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</div><div class="line">        super(context, attrs, defStyleAttr);</div><div class="line">        View view = View.inflate(context, R.layout.refreshheader, this);</div><div class="line">        mImage = (ImageView) view.findViewById(R.id.header_iv);</div><div class="line">        tv_refresh_header = (TextView) view.findViewById(R.id.header_tv);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @NonNull</div><div class="line">    @Override</div><div class="line">    public View getView() &#123;</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public SpinnerStyle getSpinnerStyle() &#123;</div><div class="line">        return SpinnerStyle.Translate;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onStartAnimator(RefreshLayout layout, int height, int extendHeight) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 状态改变时调用。在这里切换第三阶段的动画卖萌小人</div><div class="line">     * @param refreshLayout</div><div class="line">     * @param oldState</div><div class="line">     * @param newState</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onStateChanged(RefreshLayout refreshLayout, RefreshState oldState, RefreshState newState) &#123;</div><div class="line">        switch (newState) &#123;</div><div class="line">            case PullDownToRefresh: //下拉刷新开始。正在下拉还没松手时调用</div><div class="line">                mImage.setImageResource(R.mipmap.image);</div><div class="line">                tv_refresh_header.setText(&quot;下拉可以刷新&quot;);</div><div class="line">                break;</div><div class="line">            case Refreshing: //正在刷新。只调用一次</div><div class="line">                mImage.setImageResource(R.drawable.refresh);</div><div class="line">                refreshingAnim = (AnimationDrawable) mImage.getDrawable();</div><div class="line">                tv_refresh_header.setText(&quot;正在刷新...&quot;);</div><div class="line">                refreshingAnim.start();</div><div class="line">                break;</div><div class="line">            case ReleaseToRefresh:</div><div class="line"></div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 下拉过程中不断调用此方法。第一阶段从小变大的小人头动画，和第二阶段翻跟头动画都在这里设置</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onPullingDown(float percent, int offset, int headerHeight, int extendHeight) &#123;</div><div class="line"></div><div class="line"></div><div class="line">        // 下拉的百分比小于100%时，不断调用 setScale 方法改变图片大小</div><div class="line">        if (percent &lt; 1) &#123;</div><div class="line">            mImage.setScaleX(percent);</div><div class="line">            mImage.setScaleY(percent);</div><div class="line"></div><div class="line">            //是否执行过翻跟头动画的标记</div><div class="line">            if (hasSetPullDownAnim) &#123;</div><div class="line">                hasSetPullDownAnim = false;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //当下拉的高度达到Header高度100%时，开始加载正在下拉的初始动画，即翻跟头</div><div class="line">        if (percent &gt;= 1.0) &#123;</div><div class="line">            if (!hasSetPullDownAnim) &#123;</div><div class="line">                tv_refresh_header.setText(&quot;松开立即刷新...&quot;);</div><div class="line">                mImage.setImageResource(R.mipmap.image2);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 动画结束后调用</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public int onFinish(RefreshLayout layout, boolean success) &#123;</div><div class="line">        // 结束动画</div><div class="line">        if (pullDownAnim != null &amp;&amp; pullDownAnim.isRunning()) &#123;</div><div class="line">            pullDownAnim.stop();</div><div class="line">        &#125;</div><div class="line">        if (refreshingAnim != null &amp;&amp; refreshingAnim.isRunning()) &#123;</div><div class="line">            refreshingAnim.stop();</div><div class="line">        &#125;</div><div class="line">        //重置状态</div><div class="line">        hasSetPullDownAnim = false;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onReleasing(float percent, int offset, int headerHeight, int extendHeight) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onRefreshReleased(RefreshLayout layout, int headerHeight, int extendHeight) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void setPrimaryColors(int... colors) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onInitialized(RefreshKernel kernel, int height, int extendHeight) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onHorizontalDrag(float percentX, int offsetX, int offsetMax) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean isSupportHorizontalDrag() &#123;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>帧动画资源文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;animation-list android:oneshot=&quot;false&quot;</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">    &lt;item android:duration=&quot;80&quot; android:drawable=&quot;@mipmap/image_01&quot; /&gt;</div><div class="line">    &lt;item android:duration=&quot;80&quot; android:drawable=&quot;@mipmap/image_02&quot; /&gt;</div><div class="line">    &lt;item android:duration=&quot;80&quot; android:drawable=&quot;@mipmap/image_03&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;/animation-list&gt;</div></pre></td></tr></table></figure>
+<p>详细见项目地址 <a href="https://github.com/fangxiaogang/RefreshLayout" target="_blank" rel="external"><strong>RefreshLayout</strong></a></p>
+
+          <br>
+<p>fangxiaogang</p>
+<p><img src='/images/scribble3.png' alt='scribble'></p>
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://fangxiaogang.github.io/About/index.html'>About</a>
+  
+    <a class='main' href='https://github.com/fangxiaogang'>Github</a>
+  
+    <a class='main' href='mailto:1005275062@qq.com'>Email</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; John Doe. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+  <img src='/images/scribble2.png' alt='scribble' />
+</footer>
+
+  </body>
+</html>
